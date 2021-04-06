@@ -1,0 +1,41 @@
+{
+  "name": "ssr-blog",
+  "version": "1.0.0",
+  "description": "ssr blog, next, react",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "resolutions": {
+    "styled-components": "^5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/komisarov-d/ssr-blog.git"
+  },
+  "author": "Komisarov Dmitriy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/komisarov-d/ssr-blog/issues"
+  },
+  "homepage": "https://github.com/komisarov-d/ssr-blog#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "next": "^10.1.3",
+    "nextjs-progressbar": "^0.0.8",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.3",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.2.3"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.21.0",
+    "eslint": "^7.23.0",
+    "typescript": "^4.2.3"
+  }
+}
