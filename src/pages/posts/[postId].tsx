@@ -82,6 +82,7 @@ interface PostNextPageContext extends NextPageContext {
 }
 
 Post.getInitialProps = async ({ query }: PostNextPageContext) => {
+   
    const response = await axios.get<IPost>(`https://simple-blog-api.crew.red/posts/${query.postId}?_embed=comments`)
      
    return {
