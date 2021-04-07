@@ -1,10 +1,11 @@
 export interface IPost {
-   id: number,
+   id?: number,
    title: string,
-   body: string
+   body: string,
+   comments?: IComment[]
 }
-
 export interface IComment {
-   id: number,
+   id?: number,
+   postId: number,
    body: string
 }

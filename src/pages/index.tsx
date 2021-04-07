@@ -1,23 +1,24 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import Link from 'next/link';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MainLayout } from '../../layout/MainLayout';
 import { actions } from '../store/postStore/postsActions';
 import { AppState } from '../store/rootReducer';
-import { Title } from '../styles/createPageStyle';
-import { EmptyBlock } from '../styles/PostsPageStyle';
+import { PostBody } from '../styles/PostPageStyle';
+import { EmptyBlock, Post, PostList, PostsTitle, PageTitle, Line, PostLink } from '../styles/PostsPageStyle';
 import { IPost } from '../types/Types';
-
 
 interface IPostPageProps {
   initialPosts: IPost[]
 }
-
 export default function PostsPage({ initialPosts }: IPostPageProps) {
+
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(actions.setPosts(initialPosts))
+    dispatch(actions.setPosts(initialPosts.reverse()))
   }, [])
+
   const posts = useSelector((state: AppState) => state.posts.posts)
   const message = useSelector((state: AppState) => state.app.message)
 
@@ -31,15 +32,25 @@ export default function PostsPage({ initialPosts }: IPostPageProps) {
   return (
     <MainLayout title={'Posts'} message={message}>
 
-      <Title>Title</Title>
+      <PageTitle>All posts</PageTitle>
+      <Line />
 
-      <ul>
+      <PostList>
         {posts.map((post, idx) => {
-          return <li key={post.id}>{post.title} {idx}</li>
+          return (
+            <Post key={idx}>
+              <Link href={`/posts/${post.id}`}>
+
+                <PostLink>
+                  <PostsTitle>{post.title}</PostsTitle>
+                  <PostBody>{post.body}</PostBody>
+                </PostLink>
+                
+              </Link>
+            </Post>
+            )
         })}
-      </ul>
-
-
+      </PostList>
 
     </MainLayout>
   )

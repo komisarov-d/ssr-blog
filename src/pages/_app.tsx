@@ -1,9 +1,10 @@
 import NextNProgress from 'nextjs-progressbar'
 import { Provider } from 'react-redux'
 import store from '../store/rootReducer'
+import React from 'react'
+import type { AppProps } from 'next/app'
 
-
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   const options = {
     color: "#292929",
     startPosition: 0.3,

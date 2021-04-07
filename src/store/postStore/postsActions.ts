@@ -1,47 +1,42 @@
 import { IComment } from './../../types/Types';
 import { postApi } from './postApi';
-import { CREATE_POST, SET_POSTS, REMOVE_POST, UPDATE_POST, ADD_COMMENT } from './postReducer';
+import { CREATE_POST, SET_POSTS, REMOVE_POST, UPDATE_POST } from './postReducer';
 import { IPost } from "../../types/Types"
 import { InferActionsType } from '../rootReducer';
+import { showMessage } from '../appReducer/appReducer';
 
 export const actions = {
    setPosts: (payload: IPost[]) => ({ type: SET_POSTS, payload } as const),
    createPost: (payload: IPost) => ({ type: CREATE_POST, payload } as const),
-   updatePost: (payload: IPost) => ({ type: REMOVE_POST, payload } as const),
-   removePost: (payload: number) => ({ type: UPDATE_POST, payload } as const),
-   addComment: (payload: IComment) => ({ type: ADD_COMMENT, payload } as const)
+   updatePost: (payload: IPost) => ({ type: UPDATE_POST, payload } as const),
+   removePost: (payload: number) => ({ type: REMOVE_POST, payload } as const),
 }
 
-const createPostThunk = (post: IPost) => async (dispatch) => {
+export const createPostThunk = ({ ...postForm }: IPost) => async (dispatch) => {
    try {
-      await postApi.createPost(post)
-      dispatch(actions.createPost(post))
+      const response = await postApi.createPost(postForm)
+      dispatch(actions.createPost(response.data))
    } catch (error) {
-
+      dispatch(showMessage('Some error, try again.'))
    }
 }
-const updatePostThunk = (post: IPost) => async (dispatch) => {
-   try {
-      await postApi.updatePost(post)
-      dispatch(actions.updatePost(post))
-   } catch (error) {
 
-   }
-}
-const removePostThunk = (id: number) => async (dispatch) => {
+export const removePostThunk = (id: number) => async (dispatch) => {
    try {
       await postApi.removePost(id)
       dispatch(actions.removePost(id))
+      dispatch(showMessage('Posts was removed.'))
    } catch (error) {
-
+      dispatch(showMessage('Some error, try again.'))
    }
 }
-const addCommentThunk = (comment: IComment) => async (dispatch) => {
+
+export const addCommentThunk = ({ ...comment }: IComment) => async (dispatch) => {
    try {
       await postApi.addComment(comment)
-      dispatch(actions.addComment(comment))
+      dispatch(showMessage('Comment would be added after page reload.'))
    } catch (error) {
-
+      dispatch(showMessage('Some error, try again.'))
    }
 }
 
