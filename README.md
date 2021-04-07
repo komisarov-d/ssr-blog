@@ -5,9 +5,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, clone the repo on your device, then run one of command to install node_modules
 
 ```bash
-npm run dev
+npm install
 # or
-yarn dev
+yarn install
 ```
 
 After installation is complete run the development server:
